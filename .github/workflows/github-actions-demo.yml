@@ -16,6 +16,8 @@ jobs:
         run: npm install
       - name: Build
         run:  npm ci && npm run build
+        env:
+          PUBLIC_URL: /github-actions-demo
       - name: Deploy to Firebase Hosting
         run: firebase deploy --token=${{ secrets.FIREBASE_TOKEN }}
 
