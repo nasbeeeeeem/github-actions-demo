@@ -15,10 +15,7 @@ jobs:
       - name: Install Dependencies
         run: npm ci
       - name: Build
-        run: npm run build
-        env:
-          CI: false
-        working-directory: ./react-app 
+        run: cd ./react-app && npm run build
       - name: Deploy to Firebase Hosting
         run: firebase deploy --token=${{ secrets.FIREBASE_TOKEN }}
 
