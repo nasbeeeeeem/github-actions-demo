@@ -16,8 +16,7 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-        env:
-          PUBLIC_URL: /github-actions-demo/react-app
+        working-directory: ./react-app 
       - name: Deploy to Firebase Hosting
         run: firebase deploy --token=${{ secrets.FIREBASE_TOKEN }}
 
