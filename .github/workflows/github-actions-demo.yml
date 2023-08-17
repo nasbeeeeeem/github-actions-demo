@@ -13,9 +13,9 @@ jobs:
         with:
           node-version: 18
       - name: Install Dependencies
-        run: npm install --save react react-dom react-scripts
+        run: npm ci
       - name: Build
-        run:  npm ci && npm run build
+        run: npm run build
         env:
           PUBLIC_URL: /github-actions-demo/react-app
       - name: Deploy to Firebase Hosting
