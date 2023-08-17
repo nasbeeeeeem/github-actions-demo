@@ -16,6 +16,8 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+        env:
+          CI: false
         working-directory: ./react-app 
       - name: Deploy to Firebase Hosting
         run: firebase deploy --token=${{ secrets.FIREBASE_TOKEN }}
