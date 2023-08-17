@@ -14,6 +14,8 @@ jobs:
           node-version: 18
       - name: Install Dependencies
         run: npm ci
+      - name: list directory
+        run: ls -la
       - name: Build
         run: cd ./react-app && npm run build
       - name: Deploy to Firebase Hosting
