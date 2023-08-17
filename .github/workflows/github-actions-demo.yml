@@ -19,6 +19,6 @@ jobs:
       - name: Build
         run: cd react-app && npm run build
       - name: Deploy to Firebase Hosting
-        run: firebase deploy --token=${{ secrets.FIREBASE_TOKEN }}
+        run: cd react-app && npm run deploy --token=${{ secrets.FIREBASE_TOKEN }}
 
 
