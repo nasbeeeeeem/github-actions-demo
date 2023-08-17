@@ -11,11 +11,11 @@ jobs:
       - name: Checkout Node
         uses: actions/setup-node@v3
         with:
-          node-version: latest
+          node-version: 18
       - name: Install Dependencies
         run: npm install
       - name: Build
-        run: cd react-app && npm run build
+        run:  npm ci && npm run build
       - name: Deploy to Firebase Hosting
         run: firebase deploy --token=${{ secrets.FIREBASE_TOKEN }}
 
