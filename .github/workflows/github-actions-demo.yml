@@ -6,6 +6,9 @@ jobs:
   build:
     name: build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: react-app
     steps:
       # リポジトリのチェックアウト
       - name: checkout
@@ -18,16 +21,14 @@ jobs:
       # 依存関係の解決
       - name: install dependencies
         run: npm ci
-        working-directory: ./react-app
       # ビルド
       - name: build
         run: npm run build
-        working-directory: ./react-app
-      # Firebaseへのデプロイ
-      - name: deploy
-        uses: w9jds/firebase-action@master
+      # gcpの認証
+      - name: gcp auth
+        uses: google-github-actions/auth@v1
         with:
-          args: deploy --only hosting
-        env:
-          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
-          PROJECT_ID: ./react-app
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      # firebaseへのデプロイ
+      - name: deploy firebase hosting
+        run: firebase deploy
