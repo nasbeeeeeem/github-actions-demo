@@ -4,19 +4,46 @@ run-name: ${{ github.actor }} is testing out Firebase Deployment!
 on: [push]
 jobs:
   build:
+    name: build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
+      - name: checkout
         uses: actions/checkout@v3
-      - name: Checkout Node
+      - name: setup node
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Install Dependencies
-        run: cd react-app && npm ci
-      - name: list directory
-        run: ls -la
-      - name: Build
-        run: cd react-app && npm run build
-      - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: install dependencies
+        run: npm ci
+        working-directory: ./react-app
+      - name: build
+        run: npm run build
+        working-directory: ./react-app
+      - name: persist to workspase
+        uses: actions/upload-artifact@v3
+        with:
+         naem: build
+         path: ./react-app/build
+      
+      
+    
+  deploy:
+    name: deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+    - name: download workspace
+      uses: actions/download-artifact@v3
+      with:
+        name: build
+        path: ./react-app/build
+    - name: install firebase-tools
+      run: sudo npm install -g firebase-tools
+    - name: deploy
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      run: firebase deploy --token $FIREBASE_TOKEN --project github-actions-demo
+      working-directory: ./react-app
+      
