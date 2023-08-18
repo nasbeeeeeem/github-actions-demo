@@ -31,4 +31,7 @@ jobs:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
       # firebaseへのデプロイ
       - name: deploy firebase hosting
-        run: firebase deploy
+        run: |
+          npm install -g firebase-tools
+          firebase deploy
+          
