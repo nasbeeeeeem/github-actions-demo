@@ -35,4 +35,5 @@ jobs:
         env:
           PROJECT_ID: github-actions-demo-c4c76
           GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+          PROJECT_PATH: ./react-app
       #   run: firebase deploy --project=github-actions-demo-c4c76 --only=hosting
