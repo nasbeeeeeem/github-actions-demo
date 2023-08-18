@@ -33,4 +33,4 @@ jobs:
       - name: deploy firebase hosting
         run: |
           npm install -g firebase-tools
-          firebase deploy --project=github-actions-demo-c4c76 --only=hosting
+          firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} --project=github-actions-demo-c4c76 --only=hosting
