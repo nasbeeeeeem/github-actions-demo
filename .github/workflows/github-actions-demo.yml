@@ -19,5 +19,4 @@ jobs:
       - name: Build
         run: cd react-app && npm run build
       - name: Deploy to Firebase Hosting
-        run: cd react-app && firebase deploy --token=${{ secrets.FIREBASE_TOKEN }}
-        
+        uses: FirebaseExtended/action-hosting-deploy@v0
