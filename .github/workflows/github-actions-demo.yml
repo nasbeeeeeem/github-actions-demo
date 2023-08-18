@@ -24,6 +24,9 @@ jobs:
         run: npm run build
         working-directory: ./react-app
       # Firebaseへのデプロイ
+      - name: firebase init
+        run: firebase init
+        working-directory: ./react-app
       - name: deploy
         uses: w9jds/firebase-action@master
         with:
