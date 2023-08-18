@@ -25,10 +25,10 @@ jobs:
       - name: build
         run: npm run build
       # gcpの認証
-      - name: gcp auth
-        uses: google-github-actions/auth@v1
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      # - name: gcp auth
+      #   uses: google-github-actions/auth@v1
+      #   with:
+      #     credentials_json: ${{ secrets.GCP_SA_KEY }}
       # firebaseへのデプロイ
       - name: deploy firebase hosting
         run: |
