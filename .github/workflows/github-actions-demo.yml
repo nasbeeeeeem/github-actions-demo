@@ -4,19 +4,30 @@ run-name: ${{ github.actor }} is testing out Firebase Deployment!
 on: [push]
 jobs:
   build:
+    name: build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
+      # リポジトリのチェックアウト
+      - name: checkout
         uses: actions/checkout@v3
-      - name: Checkout Node
+      # Node.jsのセットアップ
+      - name: setup node
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Install Dependencies
-        run: cd react-app && npm ci
-      - name: list directory
-        run: ls -la
-      - name: Build
-        run: cd react-app && npm run build
-      - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
+      # 依存関係の解決
+      - name: install dependencies
+        run: npm ci
+        working-directory: ./react-app
+      # ビルド
+      - name: build
+        run: npm run build
+        working-directory: ./react-app
+      # Firebaseへのデプロイ
+      - name: deploy
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+          PROJECT_ID: ./react-app
