@@ -24,13 +24,10 @@ jobs:
         run: npm run build
         working-directory: ./react-app
       # Firebaseへのデプロイ
-      - name: firebase init
-        run: firebase init
-        working-directory: ./react-app
       - name: deploy
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
         env:
-          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+          GCP_SA_KEY: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT_ID: ./react-app
