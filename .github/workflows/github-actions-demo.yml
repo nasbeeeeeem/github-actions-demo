@@ -35,8 +35,8 @@ jobs:
         run: echo $GCLOUD_SERVICE_KEY | base64 -d > $GOOGLE_APPLICATION_CREDENTIALS
       # firebaseへのデプロイ
       - name: deploy firebase hosting
-        run: firebase deploy --project=github-actions-demo --only=hosting
-      #   run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} --project=github-actions-demo-c4c76 --only=hosting
+        run: firebase deploy  --token ${{ secrets.FIREBASE_TOKEN }} --project=github-actions-demo --only=hosting
+      #   run: firebase deploy --project=github-actions-demo-c4c76 --only=hosting
       
       # GCPのサービスアカウントでの認証を用いたデプロイ
       # - name: deploy firebase hosting
