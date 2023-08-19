@@ -38,7 +38,7 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
       - name: Deploy to Firebase
-        run: firebase deploy
+        run: firebase deploy --project=github-actions-demo-c4c76 --only=hosting
       # - name: deploy firebase hosting
       #   run: firebase deploy  --token ${{ secrets.GCP_SA_KEY }} --project=github-actions-demo-c4c76 --only=hosting
       #   run: firebase deploy --project=github-actions-demo-c4c76 --only=hosting
