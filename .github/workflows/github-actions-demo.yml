@@ -25,15 +25,18 @@ jobs:
       - name: build
         run: npm run build
       # firebaseのインストール
-      - name: install firebaes
-        run: npm install -g firebase-tools
+      # - name: install firebaes
+      #   run: npm install -g firebase-tools
       # firebaseへのデプロイ
+      # - name: deploy firebase hosting
+      #   run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} --project=github-actions-demo-c4c76 --only=hosting
+      
+      # GCPのサービスアカウントでの認証を用いたデプロイ
       - name: deploy firebase hosting
-        run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} --project=github-actions-demo-c4c76 --only=hosting
-        # uses: w9jds/firebase-action@master
-        # with:
-        #   args: deploy --only hosting
-        # env:
-        #   PROJECT_ID: github-actions-demo-c4c76
-        #   GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
-        #   PROJECT_PATH: ./react-app
+        uses: w9jds/firebase-action@v11.9.0
+        with:
+          args: deploy
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+          PROJECT_PATH: ./react-app
+          PROJECT_ID: ${{ secrets.PROJECT_ID }}
